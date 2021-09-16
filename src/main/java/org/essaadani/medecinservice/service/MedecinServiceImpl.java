@@ -1,22 +1,24 @@
 package org.essaadani.medecinservice.service;
 
+import lombok.RequiredArgsConstructor;
 import org.essaadani.medecinservice.dto.MedecinRequestDTO;
 import org.essaadani.medecinservice.dto.MedecinResponseDTO;
 import org.essaadani.medecinservice.entities.Medecin;
 import org.essaadani.medecinservice.mappers.MedecinMapper;
 import org.essaadani.medecinservice.repositories.MedecinRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Service
+@Transactional
+@RequiredArgsConstructor
 public class MedecinServiceImpl implements MedecinService {
-    MedecinRepository medecinRepository;
-    MedecinMapper medecinMapper;
-
-    public MedecinServiceImpl(MedecinRepository medecinRepository, MedecinMapper medecinMapper) {
-        this.medecinRepository = medecinRepository;
-        this.medecinMapper = medecinMapper;
-    }
+    private final MedecinRepository medecinRepository;
+    private final MedecinMapper medecinMapper;
 
 
     @Override
@@ -37,16 +39,23 @@ public class MedecinServiceImpl implements MedecinService {
 
     @Override
     public MedecinResponseDTO update(MedecinRequestDTO medecinRequestDTO) {
-        return null;
+        Medecin medecin = medecinMapper.medecinRequestDTOToMedecin(medecinRequestDTO);
+        Medecin updatedMedecin = medecinRepository.save(medecin);
+
+        return medecinMapper.medecinToMedecinResponseDTO(updatedMedecin);
     }
 
     @Override
     public MedecinResponseDTO save(MedecinRequestDTO medecinRequestDTO) {
-        return null;
+        Medecin medecin = medecinMapper.medecinRequestDTOToMedecin(medecinRequestDTO);
+        medecin.setId(UUID.randomUUID().toString());
+        Medecin createdMedecin = medecinRepository.save(medecin);
+
+        return medecinMapper.medecinToMedecinResponseDTO(createdMedecin);
     }
 
     @Override
     public void delete(String id) {
-
+        medecinRepository.deleteById(id);
     }
 }
