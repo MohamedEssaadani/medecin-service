@@ -48,7 +48,6 @@ public class MedecinServiceImpl implements MedecinService {
     @Override
     public MedecinResponseDTO save(MedecinRequestDTO medecinRequestDTO) {
         Medecin medecin = medecinMapper.medecinRequestDTOToMedecin(medecinRequestDTO);
-        medecin.setId(UUID.randomUUID().toString());
         Medecin createdMedecin = medecinRepository.save(medecin);
 
         return medecinMapper.medecinToMedecinResponseDTO(createdMedecin);

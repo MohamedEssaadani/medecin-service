@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MedecinRequestDTO {
+    private String id;
     private String nom;
     private Date dateNaissance;
     private String specialite;

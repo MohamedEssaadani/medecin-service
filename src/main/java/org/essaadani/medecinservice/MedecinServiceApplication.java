@@ -19,9 +19,9 @@ public class MedecinServiceApplication {
     @Bean
     CommandLineRunner start(MedecinService medecinService){
         return args -> {
-          medecinService.save(new MedecinRequestDTO("Medecin1", new Date("18/01/1998"), "Généraliste"));
-          medecinService.save(new MedecinRequestDTO("Medecin2", new Date("01/05/1990"), "Généraliste"));
-          medecinService.save(new MedecinRequestDTO("Medecin3", new Date("18/04/1985"), "Dentiste"));
+          medecinService.save(new MedecinRequestDTO("medecin1", "Medecin1", new Date("18/01/1998"), "Généraliste"));
+          medecinService.save(new MedecinRequestDTO("medecin2", "Medecin2", new Date("01/05/1990"), "Généraliste"));
+          medecinService.save(new MedecinRequestDTO("medecin3", "Medecin3", new Date("18/04/1985"), "Dentiste"));
         };
     }
 }
